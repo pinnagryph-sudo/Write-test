@@ -1,0 +1,77 @@
+{
+  "metadata": {
+    "title": "",
+    "genre": "fantasy_romance",
+    "heat_level": 4,
+    "target_word_count": 80000,
+    "current_word_count": 0
+  },
+  "timeline": {
+    "story_start_date": "Day 1",
+    "current_date": "Day 1",
+    "current_time_of_day": "morning",
+    "days_elapsed": 0
+  },
+  "chapters": {
+    "total_planned": 25,
+    "current_chapter": 0,
+    "completed_chapters": []
+  },
+  "characters": {
+    "protagonist": {
+      "name": "",
+      "current_location": "",
+      "emotional_state": "",
+      "physical_state": "healthy",
+      "knowledge_state": [],
+      "secrets_known": [],
+      "relationship_status": {}
+    },
+    "love_interest": {
+      "name": "",
+      "current_location": "",
+      "emotional_state": "",
+      "physical_state": "healthy",
+      "knowledge_state": [],
+      "secrets_known": [],
+      "relationship_status": {}
+    },
+    "supporting": {}
+  },
+  "romance_progression": {
+    "current_stage": 1,
+    "stages_completed": [],
+    "intimacy_level_reached": 0,
+    "key_romantic_moments": []
+  },
+  "plot_threads": {
+    "main_plot": {
+      "description": "",
+      "current_status": "setup",
+      "key_events": []
+    },
+    "subplots": [],
+    "active_conflicts": [],
+    "resolved_conflicts": []
+  },
+  "promises": {
+    "setups": [],
+    "payoffs_delivered": [],
+    "pending_payoffs": []
+  },
+  "worldbuilding_revealed": {
+    "locations_introduced": [],
+    "magic_rules_established": [],
+    "cultural_elements_shown": [],
+    "creatures_encountered": []
+  },
+  "chapter_summaries": {},
+  "continuity_notes": [],
+  "next_chapter": {
+    "number": 1,
+    "planned_beats": [],
+    "pov_character": "",
+    "scene_type": "",
+    "target_word_count": 3000
+  }
+}

@@ -1,0 +1,72 @@
+{
+  "sentence_metrics": {
+    "mean_length_target": {
+      "min": 14,
+      "max": 20
+    },
+    "std_dev_minimum": 8,
+    "max_consecutive_similar_length": 2,
+    "length_categories": {
+      "short": {"max": 10},
+      "medium": {"min": 11, "max": 20},
+      "long": {"min": 21}
+    }
+  },
+  "readability": {
+    "flesch_kincaid_grade": {
+      "min": 5,
+      "max": 9
+    },
+    "flesch_reading_ease": {
+      "min": 60,
+      "max": 80
+    }
+  },
+  "dialogue_metrics": {
+    "dialogue_to_narrative_ratio": {
+      "romance": {"min": 0.45, "max": 0.60},
+      "fantasy": {"min": 0.20, "max": 0.35},
+      "erotica": {"min": 0.25, "max": 0.45},
+      "default": {"min": 0.30, "max": 0.55}
+    },
+    "max_lines_without_action_beat": 5,
+    "said_tag_percentage_minimum": 80
+  },
+  "vocabulary_metrics": {
+    "mtld_target_minimum": 70,
+    "hapax_legomena_healthy_range": {
+      "min_percentage": 40,
+      "max_percentage": 60
+    }
+  },
+  "pacing_metrics": {
+    "chapter_length": {
+      "romance": {"min": 2000, "max": 4000},
+      "fantasy": {"min": 3000, "max": 5000},
+      "erotica": {"min": 1500, "max": 3000}
+    },
+    "scene_length": {
+      "fast_paced": {"max": 1000},
+      "moderate": {"min": 1000, "max": 2500},
+      "slow": {"min": 2500}
+    }
+  },
+  "character_voice": {
+    "vocabulary_overlap_max": 0.70,
+    "sentence_length_variance_from_profile": 3
+  },
+  "quality_gates": {
+    "must_pass_all": [
+      "no_blacklisted_vocabulary",
+      "sentence_variation_adequate",
+      "said_tag_percentage_met",
+      "no_adverb_tags",
+      "three_item_list_limit"
+    ],
+    "should_pass_most": [
+      "dialogue_ratio_in_range",
+      "telling_emotion_count_low",
+      "readability_in_range"
+    ]
+  }
+}
