@@ -160,16 +160,35 @@ function saveStoryDetails() {
 // DOCUMENT HANDLING
 // ============================================================================
 
-function handleFileUpload(input, docType) {
+async function readFileContent(file) {
+    const extension = file.name.split('.').pop().toLowerCase();
+
+    if (extension === 'docx') {
+        // Use mammoth.js to extract text from DOCX
+        const arrayBuffer = await file.arrayBuffer();
+        const result = await mammoth.extractRawText({ arrayBuffer });
+        return result.value;
+    } else {
+        // Read as plain text for .md and .txt
+        return new Promise((resolve, reject) => {
+            const reader = new FileReader();
+            reader.onload = (e) => resolve(e.target.result);
+            reader.onerror = reject;
+            reader.readAsText(file);
+        });
+    }
+}
+
+async function handleFileUpload(input, docType) {
     const file = input.files[0];
     if (!file) return;
 
-    const reader = new FileReader();
-    reader.onload = (e) => {
-        const content = e.target.result;
+    try {
+        const content = await readFileContent(file);
         document.getElementById(`${docType}-content`).value = content;
-    };
-    reader.readAsText(file);
+    } catch (error) {
+        alert(`Error reading file: ${error.message}`);
+    }
 }
 
 function saveDocument(docType) {
@@ -249,15 +268,16 @@ function editCharacter(name) {
     document.getElementById('character-editor').classList.remove('hidden');
 }
 
-function handleCharacterUpload(input) {
+async function handleCharacterUpload(input) {
     const file = input.files[0];
     if (!file) return;
 
-    const reader = new FileReader();
-    reader.onload = (e) => {
-        document.getElementById('character-content').value = e.target.result;
-    };
-    reader.readAsText(file);
+    try {
+        const content = await readFileContent(file);
+        document.getElementById('character-content').value = content;
+    } catch (error) {
+        alert(`Error reading file: ${error.message}`);
+    }
 }
 
 function saveCharacter() {
@@ -316,15 +336,16 @@ function updatePOVDropdown() {
 // QUALITY CHECKING
 // ============================================================================
 
-function handleQualityUpload(input) {
+async function handleQualityUpload(input) {
     const file = input.files[0];
     if (!file) return;
 
-    const reader = new FileReader();
-    reader.onload = (e) => {
-        document.getElementById('quality-text').value = e.target.result;
-    };
-    reader.readAsText(file);
+    try {
+        const content = await readFileContent(file);
+        document.getElementById('quality-text').value = content;
+    } catch (error) {
+        alert(`Error reading file: ${error.message}`);
+    }
 }
 
 function runQualityCheck() {

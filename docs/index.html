@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Novel Engine</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
 </head>
 <body>
     <div class="app">
@@ -84,8 +85,8 @@
                     <h3>World Bible</h3>
                     <p class="help-text">Define your world's geography, magic system, cultures, and history.</p>
                     <div class="upload-area" id="world-bible-upload">
-                        <input type="file" accept=".md,.txt" onchange="handleFileUpload(this, 'world-bible')">
-                        <p>Drop file here or click to upload (.md, .txt)</p>
+                        <input type="file" accept=".md,.txt,.docx" onchange="handleFileUpload(this, 'world-bible')">
+                        <p>Drop file here or click to upload (.md, .txt, .docx)</p>
                     </div>
                     <textarea id="world-bible-content" placeholder="# World Bible
 
@@ -104,8 +105,8 @@
                     <h3>Story Outline</h3>
                     <p class="help-text">Chapter-by-chapter outline with plot beats and character arcs.</p>
                     <div class="upload-area" id="story-outline-upload">
-                        <input type="file" accept=".md,.txt" onchange="handleFileUpload(this, 'story-outline')">
-                        <p>Drop file here or click to upload (.md, .txt)</p>
+                        <input type="file" accept=".md,.txt,.docx" onchange="handleFileUpload(this, 'story-outline')">
+                        <p>Drop file here or click to upload (.md, .txt, .docx)</p>
                     </div>
                     <textarea id="story-outline-content" placeholder="# Story Outline
 
@@ -133,8 +134,8 @@
                 <div id="character-editor" class="character-editor hidden">
                     <h3>Edit Character: <span id="editing-character-name">New Character</span></h3>
                     <div class="upload-area">
-                        <input type="file" accept=".md,.txt" onchange="handleCharacterUpload(this)">
-                        <p>Upload character profile (.md, .txt)</p>
+                        <input type="file" accept=".md,.txt,.docx" onchange="handleCharacterUpload(this)">
+                        <p>Upload character profile (.md, .txt, .docx)</p>
                     </div>
                     <textarea id="character-content" placeholder="# Character Name
 
@@ -169,8 +170,8 @@ How they show affection:
 
                 <div class="quality-input">
                     <div class="upload-area">
-                        <input type="file" accept=".md,.txt" onchange="handleQualityUpload(this)">
-                        <p>Upload chapter file or paste text below</p>
+                        <input type="file" accept=".md,.txt,.docx" onchange="handleQualityUpload(this)">
+                        <p>Upload chapter file or paste text below (.md, .txt, .docx)</p>
                     </div>
                     <textarea id="quality-text" placeholder="Paste your prose here to check quality..."></textarea>
                     <div class="quality-options">
