@@ -1,0 +1,256 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Novel Engine</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app">
+        <header>
+            <h1>Novel Engine</h1>
+            <p class="subtitle">Human-Voiced Fiction Generation System</p>
+        </header>
+
+        <nav class="tabs">
+            <button class="tab active" data-tab="dashboard">Dashboard</button>
+            <button class="tab" data-tab="documents">Documents</button>
+            <button class="tab" data-tab="characters">Characters</button>
+            <button class="tab" data-tab="quality">Quality Check</button>
+            <button class="tab" data-tab="generate">Generate</button>
+        </nav>
+
+        <main>
+            <!-- Dashboard Tab -->
+            <section id="dashboard" class="tab-content active">
+                <div class="dashboard-grid">
+                    <div class="card">
+                        <h3>Story Progress</h3>
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="word-progress"></div>
+                        </div>
+                        <p><span id="current-words">0</span> / <span id="target-words">80,000</span> words</p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Chapters</h3>
+                        <p class="big-number"><span id="completed-chapters">0</span> / <span id="total-chapters">25</span></p>
+                        <p>Current: Chapter <span id="current-chapter">0</span></p>
+                    </div>
+
+                    <div class="card">
+                        <h3>Story Details</h3>
+                        <div class="detail-row">
+                            <label>Title:</label>
+                            <input type="text" id="story-title" placeholder="Untitled">
+                        </div>
+                        <div class="detail-row">
+                            <label>Genre:</label>
+                            <select id="story-genre">
+                                <option value="fantasy_romance">Fantasy Romance</option>
+                                <option value="romance">Romance</option>
+                                <option value="fantasy">Fantasy</option>
+                                <option value="erotica">Erotica</option>
+                            </select>
+                        </div>
+                        <div class="detail-row">
+                            <label>Heat Level:</label>
+                            <select id="heat-level">
+                                <option value="1">1 - Sweet</option>
+                                <option value="2">2 - Sensual</option>
+                                <option value="3">3 - Steamy</option>
+                                <option value="4" selected>4 - Explicit</option>
+                                <option value="5">5 - Erotica</option>
+                            </select>
+                        </div>
+                        <button class="btn" onclick="saveStoryDetails()">Save Details</button>
+                    </div>
+
+                    <div class="card">
+                        <h3>Documents Status</h3>
+                        <ul class="status-list">
+                            <li id="status-world-bible"><span class="status-icon">○</span> World Bible</li>
+                            <li id="status-story-outline"><span class="status-icon">○</span> Story Outline</li>
+                            <li id="status-characters"><span class="status-icon">○</span> Characters</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Documents Tab -->
+            <section id="documents" class="tab-content">
+                <div class="document-section">
+                    <h3>World Bible</h3>
+                    <p class="help-text">Define your world's geography, magic system, cultures, and history.</p>
+                    <div class="upload-area" id="world-bible-upload">
+                        <input type="file" accept=".md,.txt" onchange="handleFileUpload(this, 'world-bible')">
+                        <p>Drop file here or click to upload (.md, .txt)</p>
+                    </div>
+                    <textarea id="world-bible-content" placeholder="# World Bible
+
+## Geography
+...
+
+## Magic System
+...
+
+## Cultures
+..."></textarea>
+                    <button class="btn" onclick="saveDocument('world-bible')">Save World Bible</button>
+                </div>
+
+                <div class="document-section">
+                    <h3>Story Outline</h3>
+                    <p class="help-text">Chapter-by-chapter outline with plot beats and character arcs.</p>
+                    <div class="upload-area" id="story-outline-upload">
+                        <input type="file" accept=".md,.txt" onchange="handleFileUpload(this, 'story-outline')">
+                        <p>Drop file here or click to upload (.md, .txt)</p>
+                    </div>
+                    <textarea id="story-outline-content" placeholder="# Story Outline
+
+## Chapter 1
+- Beat 1: ...
+- Beat 2: ...
+
+## Chapter 2
+..."></textarea>
+                    <button class="btn" onclick="saveDocument('story-outline')">Save Story Outline</button>
+                </div>
+            </section>
+
+            <!-- Characters Tab -->
+            <section id="characters" class="tab-content">
+                <div class="characters-header">
+                    <h3>Character Profiles</h3>
+                    <button class="btn" onclick="addNewCharacter()">+ Add Character</button>
+                </div>
+
+                <div id="characters-list" class="characters-grid">
+                    <!-- Characters will be dynamically added here -->
+                </div>
+
+                <div id="character-editor" class="character-editor hidden">
+                    <h3>Edit Character: <span id="editing-character-name">New Character</span></h3>
+                    <div class="upload-area">
+                        <input type="file" accept=".md,.txt" onchange="handleCharacterUpload(this)">
+                        <p>Upload character profile (.md, .txt)</p>
+                    </div>
+                    <textarea id="character-content" placeholder="# Character Name
+
+## Identity
+- Full Name:
+- Age:
+- Role:
+
+## Speech Patterns
+Example lines showing their voice...
+
+## Vocabulary
+Words they use:
+Words they avoid:
+
+## Emotional Expression
+How they show anger:
+How they show affection:
+"></textarea>
+                    <div class="editor-actions">
+                        <button class="btn" onclick="saveCharacter()">Save Character</button>
+                        <button class="btn btn-secondary" onclick="closeCharacterEditor()">Cancel</button>
+                        <button class="btn btn-danger" onclick="deleteCharacter()">Delete</button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Quality Check Tab -->
+            <section id="quality" class="tab-content">
+                <h3>Quality Checker</h3>
+                <p class="help-text">Paste your prose to check against style framework requirements.</p>
+
+                <div class="quality-input">
+                    <div class="upload-area">
+                        <input type="file" accept=".md,.txt" onchange="handleQualityUpload(this)">
+                        <p>Upload chapter file or paste text below</p>
+                    </div>
+                    <textarea id="quality-text" placeholder="Paste your prose here to check quality..."></textarea>
+                    <div class="quality-options">
+                        <label>Genre:
+                            <select id="quality-genre">
+                                <option value="default">Default</option>
+                                <option value="romance">Romance</option>
+                                <option value="fantasy">Fantasy</option>
+                                <option value="erotica">Erotica</option>
+                            </select>
+                        </label>
+                        <button class="btn btn-primary" onclick="runQualityCheck()">Run Quality Check</button>
+                    </div>
+                </div>
+
+                <div id="quality-results" class="quality-results hidden">
+                    <h4>Results</h4>
+                    <div class="word-count">
+                        Word Count: <span id="result-word-count">0</span>
+                    </div>
+
+                    <div class="results-section">
+                        <h5>Critical Checks (Must Pass)</h5>
+                        <div id="critical-checks"></div>
+                    </div>
+
+                    <div class="results-section">
+                        <h5>Advisory Checks</h5>
+                        <div id="advisory-checks"></div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Generate Tab -->
+            <section id="generate" class="tab-content">
+                <h3>Generate Chapter</h3>
+
+                <div class="generate-form">
+                    <div class="form-row">
+                        <label>Chapter Number:</label>
+                        <input type="number" id="gen-chapter-num" min="1" value="1">
+                    </div>
+
+                    <div class="form-row">
+                        <label>POV Character:</label>
+                        <select id="gen-pov-character">
+                            <option value="">Select character...</option>
+                        </select>
+                    </div>
+
+                    <div class="form-row">
+                        <label>Scene Beats (comma-separated):</label>
+                        <textarea id="gen-beats" placeholder="Hero arrives at the castle, Meets the mysterious stranger, Discovers a hidden passage"></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <label>Scene Type:</label>
+                        <select id="gen-scene-type">
+                            <option value="scene">Scene (Goal → Conflict → Disaster)</option>
+                            <option value="sequel">Sequel (Reaction → Dilemma → Decision)</option>
+                        </select>
+                    </div>
+
+                    <button class="btn btn-primary" onclick="generatePrompt()">Generate Prompt</button>
+                </div>
+
+                <div id="generation-output" class="generation-output hidden">
+                    <h4>Generation Prompt</h4>
+                    <p class="help-text">Copy this prompt to use with Claude or another LLM:</p>
+                    <textarea id="prompt-output" readonly></textarea>
+                    <button class="btn" onclick="copyPrompt()">Copy to Clipboard</button>
+                </div>
+            </section>
+        </main>
+
+        <footer>
+            <p>Novel Engine - Built for human-quality fiction generation</p>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
