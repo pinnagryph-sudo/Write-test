@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Bonded Path - Document Formatter</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Controls -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h1>The Bonded Path</h1>
+                <p class="subtitle">Document Formatter</p>
+            </div>
+
+            <div class="upload-section">
+                <h2>Upload File</h2>
+                <div class="upload-zone" id="uploadZone">
+                    <input type="file" id="fileInput" accept=".md,.docx" hidden>
+                    <div class="upload-content">
+                        <span class="upload-icon">◊</span>
+                        <p>Drop .md or .docx file here</p>
+                        <p class="upload-hint">or click to browse</p>
+                    </div>
+                </div>
+                <p class="file-name" id="fileName"></p>
+            </div>
+
+            <div class="settings-section">
+                <h2>Book Settings</h2>
+
+                <div class="form-group">
+                    <label for="bookNumber">Book Number</label>
+                    <select id="bookNumber">
+                        <option value="00">00 - Front Matter</option>
+                        <option value="01">01 - Pinnagryph Companion</option>
+                        <option value="02" selected>02 - Breed Atlas</option>
+                        <option value="03">03 - Soul Tie</option>
+                        <option value="04">04 - Six Realms</option>
+                        <option value="05">05 - Ceremonies</option>
+                        <option value="06">06 - Rider's Guide</option>
+                        <option value="07">07 - Warden's Guide</option>
+                        <option value="08">08 - Living World</option>
+                        <option value="09">09 - Afterword & Appendices</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="bookTitle">Book Title</label>
+                    <input type="text" id="bookTitle" value="The Breed Atlas">
+                </div>
+
+                <div class="form-group">
+                    <label for="bookSubtitle">Book Subtitle</label>
+                    <input type="text" id="bookSubtitle" value="Varieties, Patterns & Regional Lines">
+                </div>
+            </div>
+
+            <div class="actions-section">
+                <button class="btn btn-primary" id="formatBtn" disabled>
+                    <span>Format Document</span>
+                </button>
+                <button class="btn btn-secondary" id="printBtn" disabled>
+                    <span>Print / Export PDF</span>
+                </button>
+                <button class="btn btn-secondary" id="downloadHtmlBtn" disabled>
+                    <span>Download HTML</span>
+                </button>
+            </div>
+
+            <div class="stats-section" id="statsSection" hidden>
+                <h2>Document Stats</h2>
+                <div class="stat-item">
+                    <span class="stat-label">Chapters</span>
+                    <span class="stat-value" id="statChapters">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Sections</span>
+                    <span class="stat-value" id="statSections">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Sidebars</span>
+                    <span class="stat-value" id="statSidebars">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Tables</span>
+                    <span class="stat-value" id="statTables">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Words</span>
+                    <span class="stat-value" id="statWords">0</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Preview Area -->
+        <main class="preview-container">
+            <div class="preview-header">
+                <div class="zoom-controls">
+                    <button class="zoom-btn" id="zoomOut">−</button>
+                    <span class="zoom-level" id="zoomLevel">100%</span>
+                    <button class="zoom-btn" id="zoomIn">+</button>
+                </div>
+                <div class="view-toggle">
+                    <button class="view-btn active" data-view="preview">Preview</button>
+                    <button class="view-btn" data-view="source">Source</button>
+                </div>
+            </div>
+
+            <div class="preview-wrapper" id="previewWrapper">
+                <!-- Preview will be rendered here -->
+                <div class="preview-placeholder" id="previewPlaceholder">
+                    <div class="placeholder-content">
+                        <span class="placeholder-icon">· ◊ ·</span>
+                        <h2>Upload a Document</h2>
+                        <p>Drop a .md or .docx file to see the formatted preview</p>
+                    </div>
+                </div>
+                <div class="document-preview" id="documentPreview" hidden></div>
+            </div>
+
+            <div class="source-wrapper" id="sourceWrapper" hidden>
+                <pre class="source-content" id="sourceContent"></pre>
+            </div>
+        </main>
+    </div>
+
+    <!-- Print-specific container -->
+    <div class="print-container" id="printContainer"></div>
+
+    <!-- Include mammoth.js for DOCX parsing -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mammoth/1.6.0/mammoth.browser.min.js"></script>
+    <script src="parser.js"></script>
+    <script src="renderer.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
